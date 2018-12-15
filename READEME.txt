@@ -1,0 +1,16 @@
+README
+This program uses classes to represent 2 people, Bob and Alice, and a Server
+
+Diffie-Hellman
+2 instances of Diffie-Hellman occur. One between Alice and the Server (AS) and one between Bob and the server (BS)
+For AS, the agreed upon prime and root are 7727 and 31
+For BS, the agreed upon prime and root are 6143 and 61
+All parties have their own secret keys which they use to make their public keys via the formula Public_Key = (root ^ secret_key)%prime
+All parties find their shared_keys via the formula Shared_key = (others_Public_Key^my_secret_key)%prime
+
+Needham-Schroeder
+Begins with Alice calling on server to "generate_encryptions" and giving the server her identity, Bob's identity, and a nonce
+Server chooses a key for Alice and Bob and sends it encrypted to Alice via their shared key and doubly encrypted via both shared keys as well as the idenities and nonce
+Alice decrypts this message with her shared key and forwards the keys encrypted with Bob's shared key to Bob
+Bob decrypts it and sends Alice an encrypted nonce via their new final_key
+Alice decrypts this, subtracts 1, encrypts it and sends it to Bob
